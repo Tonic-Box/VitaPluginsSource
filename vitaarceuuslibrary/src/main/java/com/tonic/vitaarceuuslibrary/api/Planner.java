@@ -208,7 +208,7 @@ public final class Planner
             int allowed = unlimited ? Integer.MAX_VALUE : maxDetour * (book == tracker.getLastDelivered() ? REGRAB_MULTIPLIER : 1);
             List<WorldPoint> stands = distances.standTiles(bookcase);
             int toShelf = fromPlayer.toAny(stands);
-            if (toShelf == Distances.UNREACHABLE || (allowed != Integer.MAX_VALUE && toShelf - base > allowed))
+            if (toShelf == Distances.UNREACHABLE || (toShelf - base > allowed))
             {
                 continue;
             }

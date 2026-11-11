@@ -33,6 +33,7 @@ import net.runelite.api.gameval.ItemID;
 /**
  * The books the Arceuus Library customers ask for, with their item ids and the names the customers use.
  */
+@Getter
 public enum Book
 {
     RADAS_CENSUS(ItemID.ARCEUUS_LIBRARY_CENSUSRADA, "Rada's Census", "Census of King Rada III, by Matthias Vorseth."),
@@ -98,13 +99,10 @@ public enum Book
         return BY_NAME.get(name);
     }
 
-    @Getter
     private final int item;
 
-    @Getter
     private final String name;
 
-    @Getter
     private final String shortName;
 
     Book(int id, String shortName, String name)

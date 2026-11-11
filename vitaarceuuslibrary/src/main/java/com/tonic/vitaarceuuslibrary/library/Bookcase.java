@@ -34,6 +34,7 @@ import net.runelite.api.coords.WorldPoint;
 /**
  * One bookshelf slot: its tile, its slot indexes, and the book found or predicted there.
  */
+@Getter
 public class Bookcase
 {
     Bookcase(WorldPoint location)
@@ -42,26 +43,21 @@ public class Bookcase
         this.index = new ArrayList<>();
     }
 
-    @Getter
     private final WorldPoint location;
 
-    @Getter
     private final List<Integer> index;
 
-    @Getter
     private boolean isBookSet;
 
     /**
      * Book in this bookcase as found by the player.
      * Will be correct as long as isBookSet is true, unless the library has reset;
      */
-    @Getter
     private Book book;
 
     /**
      * Books that can be in this slot. Will only be populated if library.state != SolvedState.NO_DATA
      */
-    @Getter
     private final Set<Book> possibleBooks = new HashSet<>();
 
     void clearBook()
