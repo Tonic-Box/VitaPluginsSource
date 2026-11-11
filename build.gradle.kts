@@ -1,19 +1,34 @@
-plugins {
-    id("java")
-}
+subprojects {
+    apply(plugin = "java")
 
-group = "com.tonic.plugins"
-version = "1.0-SNAPSHOT"
+    val apiVersion: String by project
+    val lombokVersion: String by project
 
-repositories {
-    mavenCentral()
-}
+    repositories {
+        mavenLocal()
+        maven {
+            url = uri("https://repo.runelite.net")
+            content {
+                includeGroupByRegex("net\\.runelite.*")
+            }
+        }
+        mavenCentral()
+    }
 
-dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-}
+    configure<JavaPluginExtension> {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
 
-tasks.test {
-    useJUnitPlatform()
+    tasks.withType<JavaCompile>().configureEach {
+        options.encoding = "UTF-8"
+    }
+
+    dependencies {
+        "compileOnly"("net.runelite:client:$apiVersion")
+        "compileOnly"("com.tonic:base-api:$apiVersion")
+        "compileOnly"("com.tonic:api:$apiVersion")
+        "compileOnly"("org.projectlombok:lombok:$lombokVersion")
+        "annotationProcessor"("org.projectlombok:lombok:$lombokVersion")
+    }
 }
