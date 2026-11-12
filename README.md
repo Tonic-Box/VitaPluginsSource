@@ -4,6 +4,7 @@ Source for TonicBox's VitaLite plugins. Each plugin is its own Gradle subproject
 | Plugin | What it does |
 |--------|--------------|
 | [Vita Arceuus Library](vitaarceuuslibrary/README.md) | Plays the Arceuus Library minigame for Magic or Runecraft XP |
+| [Vita MTA](vitamta/README.md) | Plays the Mage Training Arena rooms for pizazz points |
 | [VitaVR](vitavr/README.md) | Play in a VR headset and switch back to the desktop at any time |
 | [Vita Wintertodt](vitawintertodt/README.md) | Plays the Wintertodt minigame for you |
 
@@ -13,6 +14,7 @@ Source for TonicBox's VitaLite plugins. Each plugin is its own Gradle subproject
 ```
 ./gradlew :vitavr:buildPlugin
 ./gradlew :vitaarceuuslibrary:build
+./gradlew :vitamta:build
 ./gradlew :vitawintertodt:build
 ```
 
