@@ -32,6 +32,11 @@ class TemporossOverlay extends OverlayPanel
     @Override
     public Dimension render(Graphics2D graphics)
     {
+        if (!plugin.getConfig().run())
+        {
+            return null;
+        }
+
         CoveTracker tracker = plugin.getTracker();
         if (tracker == null)
         {

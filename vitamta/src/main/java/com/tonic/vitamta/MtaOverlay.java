@@ -33,6 +33,11 @@ class MtaOverlay extends OverlayPanel
     @Override
     public Dimension render(Graphics2D graphics)
     {
+        if (!plugin.getConfig().run())
+        {
+            return null;
+        }
+
         if (plugin.getTracker() == null)
         {
             return null;

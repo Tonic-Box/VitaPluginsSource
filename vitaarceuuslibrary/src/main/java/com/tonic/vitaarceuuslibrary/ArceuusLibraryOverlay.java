@@ -30,6 +30,11 @@ class ArceuusLibraryOverlay extends OverlayPanel
     @Override
     public Dimension render(Graphics2D graphics)
     {
+        if (!plugin.getConfig().run())
+        {
+            return null;
+        }
+
         LibraryTracker tracker = plugin.getTracker();
         Instant start = plugin.getStart();
         long millis = start == null ? 0 : Duration.between(start, Instant.now()).toMillis();
