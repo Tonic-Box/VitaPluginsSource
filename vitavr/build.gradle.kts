@@ -1,5 +1,3 @@
-import java.nio.file.Paths
-
 plugins {
     java
 }
@@ -13,7 +11,6 @@ base {
 
 val apiVersion: String by project
 val lwjglVersion = "3.3.2"
-val sideloadedPluginsDir: File = Paths.get(System.getProperty("user.home"), ".runelite", "sideloaded-plugins").toFile()
 
 val shade: Configuration by configurations.creating {
     isTransitive = false
@@ -37,7 +34,7 @@ tasks.test {
 
 tasks.register<Jar>("buildPlugin") {
     group = "build"
-    description = "Builds the plugin JAR with OpenXR bundled and moves it to sideloaded-plugins for easy refreshing"
+    description = "Builds the plugin JAR with OpenXR bundled"
     dependsOn(tasks.named("classes"))
 
     from(sourceSets.main.get().output)
@@ -48,8 +45,16 @@ tasks.register<Jar>("buildPlugin") {
     archiveBaseName.set("VitaVR")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-    destinationDirectory.set(file(sideloadedPluginsDir))
-    doFirst {
-        sideloadedPluginsDir.mkdirs()
-    }
+    destinationDirectory.set(layout.buildDirectory.dir("plugin"))
+}
+
+tasks.build {
+    finalizedBy("deployToRuneLite")
+}
+
+tasks.register<Copy>("deployToRuneLite") {
+    description = "Copy the plugin JAR to RuneLite sideloaded-plugins directory"
+
+    from(tasks.named("buildPlugin"))
+    into("${System.getProperty("user.home")}/.runelite/sideloaded-plugins")
 }
